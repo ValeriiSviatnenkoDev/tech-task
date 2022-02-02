@@ -1,50 +1,19 @@
-import { makeAutoObservable } from "mobx";
-
-interface IUser {
-    username: string,
-    firstname: string,
-    lastname: string,
-    enabled: boolean
-}
-
-type TUser = {
-    username: string,
-    firstname: string,
-    lastname: string,
-    enabled: boolean
-}
-
-const addUser = (users: IUser[], username: string, firstname: string, lastname: string, enabled: boolean): IUser[] => [
-    ...users,
-    {
-        username,
-        firstname,
-        lastname,
-        enabled
-    }
-];
+import { makeAutoObservable, toJS } from "mobx";
+import { IUser } from "./interfaces/User";
 
 class Store {
     users: IUser[] = [];
-    newUser: TUser = {
-        username: '',
-        firstname: '',
-        lastname: '',
-        enabled: false
-    }
 
     constructor() {
         makeAutoObservable(this);
     }
 
-    addUser() {
-        this.users = addUser(this.users, this.newUser.username, this.newUser.firstname, this.newUser.lastname, this.newUser.enabled);
-        this.newUser = {
-            username: '',
-            firstname: '',
-            lastname: '',
-            enabled: false
-        };
+    addUser(username: string, firstname: string, lastname: string, lastlogin: Date, enabled: boolean) {
+        this.users.push({ id: this.users.length + 1, username, fullname: `${firstname} ${lastname}`, lastlogin, enabled });
+    }
+
+    updateUser(id: number, user: IUser) {
+        this.users.splice(id - 1, 1, user);
     }
 }
 

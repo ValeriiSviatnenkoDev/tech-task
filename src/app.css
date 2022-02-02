@@ -1,0 +1,18 @@
+.App {
+    max-width: 1920px;
+    height: 800px;
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.App button {
+    margin: 10px 0px;
+    background-color: rgb(50, 115, 255);
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 600;
+}

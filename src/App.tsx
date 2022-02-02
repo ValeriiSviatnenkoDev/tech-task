@@ -1,14 +1,16 @@
-import React from 'react';
-
-import Dialog from './components/Dialog';
-import Users from './components/Users';
-
+import { Route, Routes } from 'react-router-dom';
 import '@progress/kendo-theme-default/dist/all.css';
+import './app.css';
+import Main from './components/Main';
+import EditGrid from './components/EditUser/EditGrid';
 
 const App = () => {
   return (
     <div className="App">
-      <Dialog />
+     <Routes>
+      <Route path="/" element={<Main />}/>
+      <Route path="/:id" element={<EditGrid />}/>
+     </Routes>
     </div>
   );
 }
